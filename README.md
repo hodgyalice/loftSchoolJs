@@ -1,5 +1,7 @@
 ## LoftSchool example project
 
+## test set remote 
+
 ### Доступные команды
 
 * `npm install` - установить зависимости

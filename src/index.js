@@ -11,13 +11,16 @@
  */
 function isAllTrue(array, fn) {
 
-    if (( array == 0 ) || (array.length <= 0)) {
+
+    if (!Array.isArray(array) || (array.length <= 0)) {
         throw new Error("empty array");
     } else if (typeof fn != 'function') {
         throw new Error("fn is not a function");
     }
     else {
-    	if(i = 0; i < array.length; i++) {}
+    	for(i = 0; i < array.length; i++) {
+
+    	}
     }
 }
 

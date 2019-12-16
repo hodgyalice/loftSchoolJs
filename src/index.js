@@ -11,6 +11,7 @@
  */
 function isAllTrue(array, fn) {
 
+	console.log("isAllTrue started!!! 11111111111111111111");
 
     if (!Array.isArray(array) || (array.length <= 0)) {
         throw new Error("empty array");
@@ -18,9 +19,19 @@ function isAllTrue(array, fn) {
         throw new Error("fn is not a function");
     }
     else {
-    	for(i = 0; i < array.length; i++) {
 
-    	}
+		let counter = 0;
+   		array.forEach(el => {
+   			if(!fn(el)) counter++;
+   		});
+
+
+   		if (counter == 0) {
+    		return true;
+   		} else {
+   			return false;
+   		}
+
     }
 }
 
@@ -41,7 +52,7 @@ function isSomeTrue(array, fn) {
 	} else if (typeof fn != 'function') {
 		throw new Error('fn is not a function');
 	} else {
-		if(i = 0; i < array.length; i++) {
+		for(i = 0; i < array.length; i++) {
 
 		}
 	}

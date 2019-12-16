@@ -11,8 +11,6 @@
  */
 function isAllTrue(array, fn) {
 
-	console.log("isAllTrue started!!! 11111111111111111111");
-
     if (!Array.isArray(array) || (array.length <= 0)) {
         throw new Error("empty array");
     } else if (typeof fn != 'function') {
@@ -20,13 +18,15 @@ function isAllTrue(array, fn) {
     }
     else {
 
-		let counter = 0;
+		// let counter = 0;
+		let flag = true;
    		array.forEach(el => {
-   			if(!fn(el)) counter++;
+   			// if(!fn(el)) counter++;
+   			if(!fn(el)) flag = false;
    		});
 
 
-   		if (counter == 0) {
+   		if (flag) {
     		return true;
    		} else {
    			return false;
@@ -47,15 +47,28 @@ function isAllTrue(array, fn) {
  */
 function isSomeTrue(array, fn) {
 
-	if ((array.length <= 0) || (array == 0) || typeof array != 'array') {
-		throw new Error("empty array");
-	} else if (typeof fn != 'function') {
-		throw new Error('fn is not a function');
-	} else {
-		for(i = 0; i < array.length; i++) {
+	 if (!Array.isArray(array) || (array.length <= 0)) {
+        throw new Error("empty array");
+    } else if (typeof fn != 'function') {
+        throw new Error("fn is not a function");
+    }
+    else {
 
-		}
-	}
+		// let counter = 0;
+		let flag = false;
+   		array.forEach(el => {
+   			// if(!fn(el)) counter++;
+   			if(fn(el)) flag = true;
+   		});
+
+
+   		if (flag) {
+    		return true;
+   		} else {
+   			return false;
+   		}
+
+    }
 }
 
 /*

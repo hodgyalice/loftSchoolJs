@@ -80,9 +80,14 @@ function isSomeTrue(array, fn) {
  - fn не является функцией (с текстом "fn is not a function")
  */
 function returnBadArguments(fn) {
-
+	var ar = []
 	for(let i = 1; i < arguments.length; i++) {
-		console.log(fn(arguments[i]));
+
+		try {
+			fn(arguments[i])
+		} catch {
+			ar.push(arguments[i]); // 7
+		}
 
 	}
 
@@ -94,7 +99,7 @@ function returnBadArguments(fn) {
 		return [];
 	}
  
-
+	return ar;
 
 }
 

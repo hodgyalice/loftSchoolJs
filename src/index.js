@@ -69,13 +69,19 @@ function getEnumProps(obj) {
  Функция должна перебрать все свойства объекта, преобразовать их имена в верхний регистра и вернуть в виде массива
  */
 function upperProps(obj) {
-}
-
+    var arr = [];
+    for (var key in obj) {
+        key = key.toUpperCase();
+        arr.push(key);
+    }
+    return arr;
+}/;.
 /*
  Задача 8 *:
  Напишите аналог встроенного метода slice для работы с массивами
  */
 function slice(array, from, to) {
+
 }
 
 /*

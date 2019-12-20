@@ -75,7 +75,8 @@ function upperProps(obj) {
         arr.push(key);
     }
     return arr;
-}/;.
+};
+
 /*
  Задача 8 *:
  Напишите аналог встроенного метода slice для работы с массивами

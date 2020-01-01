@@ -15,11 +15,11 @@ function forEach(array, fn) {
  Напишите аналог встроенного метода map для работы с массивами
  */
 function map(array, fn) {
-    var copyArray = [];
+    var tempArray = [];
     for (var i = 0; i < array.length; i++) {
-        copy_array[i] = fn(array[i], i, array);
+        tempArray[i] = fn(array[i], i, array);
     }
-    return copyArray;
+    return tempArray;
 }
 
 /*
@@ -27,7 +27,11 @@ function map(array, fn) {
  Напишите аналог встроенного метода reduce для работы с массивами
  */
 function reduce(array, fn, initial) {
-
+	var acc;
+    for (var i = 0; i < array.length; i++) {
+        temp[i] = fn(acc, array[i], i, array);
+    }
+    return temp;
 }
 
 /*
@@ -57,10 +61,14 @@ function hasProperty(obj, prop) {
  Функция должна получить все перечисляемые свойства объекта и вернуть их в виде массива
  */
 function getEnumProps(obj) {
+	console.log("obj 1111111111111");
+	console.log(obj);
 	var arr = []
 	for(key in obj) {
-		arr.pish(key);
+		arr.push(obj[key]);
 	}
+	console.log("ARR ====================================================");
+	console.log(arr);
 	return arr
 }
 
@@ -82,6 +90,7 @@ function upperProps(obj) {
  Напишите аналог встроенного метода slice для работы с массивами
  */
 function slice(array, from, to) {
+	
 
 }
 

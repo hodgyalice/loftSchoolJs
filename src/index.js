@@ -7,6 +7,10 @@
  * @return {Element}
  */
 function createDivWithText(text) {
+    var newDiv = document.createElement('div');
+    document.body;
+    newDiv.textContent = text;
+    return newDiv;
 }
 
 /**
@@ -16,6 +20,9 @@ function createDivWithText(text) {
  * @return {Element}
  */
 function createAWithHref(hrefValue) {
+    var newA = document.createElement('a');
+    newA.href = hrefValue;
+    return newA;
 }
 
 /**
@@ -25,6 +32,7 @@ function createAWithHref(hrefValue) {
  * @param {Element} where - куда вставлять
  */
 function prepend(what, where) {
+    where.prepend(what);
 }
 
 /**
@@ -42,6 +50,14 @@ function prepend(what, where) {
  * т.к. следующим соседом этих элементов является элемент с тегом P
  */
 function findAllPSiblings(where) {
+    var w = where.children;
+    var arr = [];
+    for (var i = 0; i < w.length - 1; i++) {
+        if (w[i].nextElementSibling.nodeName === 'P') {
+            arr.push(w[i]);
+        }
+    }
+    return arr;
 }
 
 /**
@@ -56,7 +72,7 @@ function findError(where) {
     var result = [];
 
     for (var i = 0; i < where.childNodes.length; i++) {
-        result.push(where.childNodes[i].innerText);
+        result.push(where.childNodes[i].element);
     }
 
     return result;

@@ -72,7 +72,10 @@ function findError(where) {
     var result = [];
 
     for (var i = 0; i < where.childNodes.length; i++) {
-        result.push(where.childNodes[i].element);
+        if(where.childNodes[i].nodeType === 1) {
+            result.push(where.childNodes[i].innerText);
+        }
+        
     }
 
     return result;
@@ -92,6 +95,11 @@ function findError(where) {
  * должно быть преобразовано в <div></div><p></p>
  */
 function deleteTextNodes(where) {
+    for (var i = 0; i < where.childNodes.length; i++) {
+      if(where.childNodes[i].nodeType === 3) {
+        where.childNodes[i].parentNode.removeChild(where.childNodes[i]);
+      }
+    }
 }
 
 /**
@@ -105,6 +113,8 @@ function deleteTextNodes(where) {
  * должно быть преобразовано в <span><div><b></b></div><p></p></span>
  */
 function deleteTextNodesRecursive(where) {
+    
+    
 }
 
 /**
@@ -130,6 +140,9 @@ function deleteTextNodesRecursive(where) {
  * }
  */
 function collectDOMStat(root) {
+    
+
+
 }
 
 /**

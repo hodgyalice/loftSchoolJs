@@ -8,8 +8,8 @@
  */
 function createDivWithText(text) {
     var newDiv = document.createElement('div');
-    document.body;
     newDiv.textContent = text;
+    document.body.appendChild(newDiv);
     return newDiv;
 }
 

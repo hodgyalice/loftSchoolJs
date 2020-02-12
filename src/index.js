@@ -69,7 +69,7 @@ function delegate(target, fn) {
  */
 function once(target, fn) {
 	target.addEventListener('click', function() {
-		
+		target.addEventListener('click');
 	})
 }
 

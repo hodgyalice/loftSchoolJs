@@ -28,8 +28,10 @@ function loadAndSortTowns() {
     req.open('GET', 'https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json', true);
     req.responseType = 'json';
     req.addEventListener('load', function() {
-
+        resolve(req.sort)
     })
+
+    xhr.send
   })
 }
 

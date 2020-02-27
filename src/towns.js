@@ -27,8 +27,16 @@
  * @example
  * homeworkContainer.appendChild(...);
  */
-let homeworkContainer = document.querySelector('#homework-container');
-
+	let homeworkContainer = document.querySelector('#homework-container');
+    var req = new XMLHttpRequest();
+    Promise(function(resolve, reject) {
+    	req.open('GET', 'https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json', true);
+    	req.responseType = 'json';
+   		req.addEventListener('load', function() {
+        resolve(req.sort)
+    })
+    }
+    
 /**
  * Функция должна загружать список городов из https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json
  * И возвращать Promise, которой должен разрешиться массивом загруженных городов
@@ -36,6 +44,17 @@ let homeworkContainer = document.querySelector('#homework-container');
  * @return {Promise<Array<{name: string}>>}
  */
 function loadTowns() {
+	var list = new XMLHttpRequest();
+    Promise(function(resolve, reject) {
+    	req.open('GET', 'https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json', true);
+    	req.responseType = 'json';
+    	req.addEventListener('load', function() {
+        resolve(req.sort(function){
+        	
+        })
+    })
+    }
+
 }
 
 /**

@@ -40,7 +40,8 @@ function skipDefault(eventName, target) {
  * @param {Element} target - элемент, на который нужно добавить обработчик
  */
 function emulateClick(target) {
-	target.dispatchEvent('click');
+    var event = new Event("click", { bubbles: true, cancelable: false });
+	target.dispatchEvent(event);
 }
 
 /**
@@ -70,15 +71,16 @@ function delegate(target, fn) {
 function once(target, fn) {
     let isDone = false;
 
-    target.addEventListener('click', function() {
-        if(!isDone) {
+    if(!isDone) {
+            target.addEventListener('click', fn)
             console.log("DO SOME");
             isDone = true;
         } else {
             console.log("Remove listener")
             target.removeEventListener('click');
-        }    
-    })
+        } 
+
+    
 
 }
 

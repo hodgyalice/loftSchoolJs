@@ -177,6 +177,7 @@ function collectDOMStat(root) {
  * }
  */
 function observeChildNodes(where, fn) {
+    // https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
 }
 
 export {

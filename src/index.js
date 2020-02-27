@@ -29,7 +29,7 @@ function removeListener(eventName, target, fn) {
  * @param {Element} target - элемент, на который нужно добавить обработчик
  */
 function skipDefault(eventName, target) {
-	target.addEventListener(eventName, fn(e) {
+	target.addEventListener(eventName, function(e) {
 		e.preventDefault();
 	})
 }
@@ -68,9 +68,18 @@ function delegate(target, fn) {
  * @param {function} fn - обработчик
  */
 function once(target, fn) {
-	target.addEventListener('click', function() {
-		target.addEventListener('click');
-	})
+    let isDone = false;
+
+    target.addEventListener('click', function() {
+        if(!isDone) {
+            console.log("DO SOME");
+            isDone = true;
+        } else {
+            console.log("Remove listener")
+            target.removeEventListener('click');
+        }    
+    })
+
 }
 
 export {

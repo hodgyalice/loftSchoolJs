@@ -113,8 +113,16 @@ function deleteTextNodes(where) {
  * должно быть преобразовано в <span><div><b></b></div><p></p></span>
  */
 function deleteTextNodesRecursive(where) {
-    
-    
+    for (let i = 0; i < where.childNodes.length; i++) {
+        let child = where.childNodes[i];
+
+        if (child.nodeType === 3) {
+            where.removeChild(child); 
+            i--; 
+        } else if (child.nodeType === 1) {
+            deleteTextNodesRecursive(child);
+        }
+    }
 }
 
 /**
@@ -140,11 +148,46 @@ function deleteTextNodesRecursive(where) {
  * }
  */
 function collectDOMStat(root) {
-    
+    let obj = { //создание объекта с искомым количеством тегов, классов, текстов
+        tags: {},
+        classes: {},
+        texts: 0
+    };
+    const reader = (where) => { //функция
+        let list = where.childNodes; //для сокарщения записи
+        if (list.length > 0) { //если есть дочерние узлы
+            Array.from(list).forEach(item => { //применить к каждому элементу
+                if (item.nodeType === 1) { //если явдяется элементом
+                    let classValue = item.classList; //классы элемента
+                    let tagValue = item.tagName; //теги элемента
 
+                    if (obj.tags.hasOwnProperty(tagValue)) { //если свойство объкта содержит элемент с тегом
+                        obj.tags[tagValue]++; //увеличиваем количество на 1
+                    } else {
+                        obj.tags[tagValue] = 1; //иначе ничего не происходит
+                    }
+                    if (classValue.length) { //если количество элементов с классами отлично от 0
+                        classValue.forEach(className => { //применяем для каждого элемента
+                            if (obj.classes.hasOwnProperty(className)) { //если свойство объекта содержит элемент с классом
+                                obj.classes[className]++; //увеличиваем количество элементов с классом на 1
+                            } else { //иначе - неизменно
+                                obj.classes[className] = 1;
+                            }
+                        })
+                    }
+                } else if (item.nodeType === 3) { //если узел является текстом
+                    obj.texts++; //то увеличиваем количество текста на 1
+                }
+                reader(item); //вызываем функцию reader c аргуменом (item)
+            });
+        }//на всплытие
+    };
+
+    reader(root); //вызываем функцию reader с аргументом root
+
+    return obj; //возаращаем объект
 
 }
-
 /**
  * *** Со звездочкой ***
  * Функция должна отслеживать добавление и удаление элементов внутри элемента where
@@ -178,6 +221,27 @@ function collectDOMStat(root) {
  */
 function observeChildNodes(where, fn) {
     // https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
+    let observer = new MutationObserver(function(mutations) => { //наблюдатель за изменениями
+      mutations.forEach(function(mutation) { //для каждого элемента
+        if(mutation.type == 'childeList') { //если изменения в детях
+            if(mutation.addedNodes.length>=1) { //если добавлено больше одного элемента
+                let obj = { //создаем объект
+                    type: "insert", //тип события
+                    nodes: [...mutation.addedNodes] //узлы: добавленные элементы
+                };
+                fn(obj); //вызываем объект obj, которые содержит два свойства
+            }
+            if(mutation.removeNodes.length >= 1) { //если удалено больше 1 элемента
+                let obj = { //создаем объект
+                    type: 'remove', //тип события
+                    nodes: [...mutation.removedNodes] //объект из удаленных элементов
+                };
+                fn(obj);
+            }
+        }
+      })
+    });
+    
 }
 
 export {

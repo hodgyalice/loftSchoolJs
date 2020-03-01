@@ -29,7 +29,15 @@ function createDiv() {
 	btn.oncklick = function() {
 		let div = document.createElement('div');
         div.className = "draggable-div";
+        div.style.background = 'rgb('+getRandomInt(0,255)+', '+getRandomInt(0,255)+', '+getRandomInt(0,255)+')';
+        div.style.width = getRandomInt(20, 100) + 'px';
+        div.style.height = getRandomInt(20, 100) + 'px';
+        div.style.top= getRandomInt(0, 450) + 'px';
+        div.style.left=  getRandomInt(0, 450) + 'px';
 	}
+    function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+    }
 }
 
 /**

@@ -33,9 +33,17 @@
     	req.open('GET', 'https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json', true);
     	req.responseType = 'json';
    		req.addEventListener('load', function() {
-        resolve(req.sort)
+        resolve(xhr.response.sort(function (a, b) {
+                if (a.name > b.name) {
+                    return 1;
+                }
+                if (a.name < b.name) {
+                    return -1;
+                }
+                return 0;
+            }));
     })
-    }
+    };
     
 /**
  * Функция должна загружать список городов из https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json
@@ -44,16 +52,16 @@
  * @return {Promise<Array<{name: string}>>}
  */
 function loadTowns() {
-	var list = new XMLHttpRequest();
-    Promise(function(resolve, reject) {
-    	req.open('GET', 'https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json', true);
-    	req.responseType = 'json';
-    	req.addEventListener('load', function() {
-        resolve(req.sort(function){
-        	
-        })
+	let url = 'https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json';
+    return (async () => {
+        try {
+
+        }
+
+        catch {
+
+        }
     })
-    }
 
 }
 
@@ -71,6 +79,12 @@ function loadTowns() {
  * @return {boolean}
  */
 function isMatching(full, chunk) {
+    let regexp = new RegExp(chunk, 'i');
+    if(full.search(regexp) > -1) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 let loadingBlock = homeworkContainer.querySelector('#loading-block');

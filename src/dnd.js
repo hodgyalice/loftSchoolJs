@@ -52,7 +52,7 @@ let addDivButton = homeworkContainer.querySelector('#addDiv');
 
 addDivButton.addEventListener('click', function() {
     // создать новый div
-    let div = createDiv();
+    let div = createDiv(div);
 
     // добавить на страницу
     homeworkContainer.appendChild(div);
